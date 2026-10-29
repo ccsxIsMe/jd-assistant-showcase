@@ -1,0 +1,103 @@
+{
+  "name": "extractRequirements",
+  "promptVersion": "extractRequirements@1.1.0",
+  "inputExample": {
+    "title": "前端工程师",
+    "sources": [
+      {
+        "id": "source-project",
+        "title": "项目说明",
+        "type": "project",
+        "person": "示例负责人（虚构）",
+        "createdAt": "2026-10-24T00:00:00.000Z",
+        "removed": false,
+        "versions": [
+          {
+            "revision": 1,
+            "text": "需要完成订单列表和订单详情页面。",
+            "createdAt": "2026-10-24T00:00:00.000Z"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "task-pages",
+        "kind": "task",
+        "revision": 1,
+        "title": "订单页面建设",
+        "text": "完成订单列表和订单详情页面。",
+        "scope": "仅前端页面",
+        "category": "must",
+        "priority": "medium",
+        "status": "confirmed",
+        "locked": false,
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。",
+            "start": 0,
+            "verified": true
+          }
+        ],
+        "taskIds": [],
+        "requirementIds": [],
+        "origin": "user",
+        "lastChange": "2026-10-24T00:00:00.000Z"
+      }
+    ],
+    "answeredQuestions": [],
+    "decisions": []
+  },
+  "outputExample": {
+    "tasks": [
+      {
+        "key": "pages",
+        "title": "订单页面建设",
+        "text": "完成订单列表和订单详情页面。",
+        "scope": "项目实际工作",
+        "category": "must",
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。"
+          }
+        ],
+        "taskKeys": []
+      }
+    ],
+    "requirements": [],
+    "questions": [
+      {
+        "title": "这项岗位首版是否承担新增服务开发？",
+        "detail": "资料只明确页面交付，需要比较职责范围，而非让非技术用户先决定框架。",
+        "choices": [
+          {
+            "id": "existing-api",
+            "label": "界面实现并对接现有服务",
+            "impact": "新服务开发交由其他责任方确认",
+            "sourceType": "ai_suggestion"
+          },
+          {
+            "id": "service-delivery",
+            "label": "同时承担新增服务交付",
+            "impact": "需进一步核对接口、数据和协作边界",
+            "sourceType": "ai_suggestion"
+          }
+        ],
+        "important": true,
+        "targetIds": [],
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。"
+          }
+        ]
+      }
+    ],
+    "notice": "候选条目待人工确认。"
+  }
+}

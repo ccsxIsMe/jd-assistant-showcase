@@ -1,0 +1,85 @@
+{
+  "name": "inspectIssues",
+  "promptVersion": "inspectIssues@1.1.0",
+  "inputExample": {
+    "title": "前端工程师",
+    "sources": [
+      {
+        "id": "source-project",
+        "title": "项目说明",
+        "type": "project",
+        "person": "示例负责人（虚构）",
+        "createdAt": "2026-10-24T00:00:00.000Z",
+        "removed": false,
+        "versions": [
+          {
+            "revision": 1,
+            "text": "需要完成订单列表和订单详情页面。",
+            "createdAt": "2026-10-24T00:00:00.000Z"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "task-pages",
+        "kind": "task",
+        "revision": 1,
+        "title": "订单页面建设",
+        "text": "完成订单列表和订单详情页面。",
+        "scope": "仅前端页面",
+        "category": "must",
+        "priority": "medium",
+        "status": "confirmed",
+        "locked": false,
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。",
+            "start": 0,
+            "verified": true
+          }
+        ],
+        "taskIds": [],
+        "requirementIds": [],
+        "origin": "user",
+        "lastChange": "2026-10-24T00:00:00.000Z"
+      }
+    ],
+    "answeredQuestions": [],
+    "decisions": []
+  },
+  "outputExample": {
+    "questions": [
+      {
+        "title": "新增接口实现是否纳入本岗位？",
+        "detail": "现有说明只明确了页面交付，职责边界尚缺少确认，请负责人决定接口实现是否纳入。",
+        "important": true,
+        "targetIds": ["task-pages"],
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。"
+          }
+        ],
+        "choices": [
+          {
+            "id": "integrate",
+            "label": "仅接入已有接口",
+            "impact": "服务实现需要明确其他协作方",
+            "sourceType": "ai_suggestion"
+          },
+          {
+            "id": "implement",
+            "label": "本岗位负责接口实现",
+            "impact": "需核对服务开发能力与交付约束",
+            "sourceType": "ai_suggestion"
+          }
+        ]
+      }
+    ],
+    "notice": "仅提示需要人确认的事项，不代替负责人决定。"
+  }
+}

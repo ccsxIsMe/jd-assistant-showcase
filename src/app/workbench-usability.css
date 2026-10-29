@@ -1,0 +1,223 @@
+/* Readable business text and native, keyboard-accessible split panes. */
+.workspace-root,
+.work-modal {
+  font-size: 15px;
+}
+.workspace-root .field,
+.work-modal .field {
+  font-size: 16px;
+}
+.workspace-root .tiny,
+.work-modal .tiny {
+  font-size: 13px;
+  line-height: 1.7;
+}
+.workspace-root .text-button,
+.work-modal .text-button {
+  min-height: 30px;
+}
+.object-title h3,
+.selection-context strong,
+.question-title strong {
+  line-height: 1.6;
+}
+.object-main > p,
+.jd-block textarea,
+.source-original,
+.diff-grid {
+  line-height: 1.85;
+}
+.review-tabs button {
+  min-width: 0;
+  white-space: normal;
+  line-height: 1.5;
+  padding: 11px 5px;
+}
+.panel-title {
+  min-height: 50px;
+  height: auto;
+  flex-shrink: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.source-tile {
+  min-height: 68px;
+}
+.source-tile strong {
+  white-space: normal;
+  line-height: 1.6;
+}
+.review-body > p.tiny,
+.question-detail,
+.suggestion-change > p,
+.source-tile small {
+  color: #596d89;
+}
+.item-tags,
+.question-tags,
+.jd-block-links,
+.relationship-row {
+  flex-wrap: wrap;
+}
+.editor-toolbar {
+  min-height: 54px;
+  height: auto;
+  flex-wrap: wrap;
+}
+.editor-views {
+  min-height: 50px;
+}
+.editor-ai-tools {
+  min-height: 42px;
+  margin-left: auto;
+}
+.workflow-guide {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 13px 20px;
+  background: #f3f7fe;
+  border-bottom: 1px solid #e1e8f3;
+  flex-shrink: 0;
+  color: #536580;
+  font-size: 13px;
+  line-height: 1.65;
+}
+.workflow-guide > div {
+  flex: 1;
+  min-width: 220px;
+}
+.workflow-guide strong {
+  color: #304c75;
+  font-size: 14px;
+  font-weight: 600;
+}
+.workflow-guide p {
+  margin: 4px 0;
+}
+.workflow-guide .text-button {
+  font-size: 13px;
+  padding: 0;
+}
+.workflow-guide > button {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.jd-update-explanation {
+  line-height: 1.9;
+  margin-bottom: 20px;
+  color: #536580;
+}
+.work-modal .form-label {
+  display: block;
+  margin: 16px 0 8px;
+  font-weight: 600;
+}
+.request-error-notice {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 7px;
+  padding: 12px 16px;
+  background: #fff4f2;
+  color: #9d342e;
+  border-bottom: 1px solid #f3d5cf;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+.request-error-notice p {
+  margin: 0;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.request-error-notice small {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.request-error-notice > div {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.request-error-notice a {
+  text-decoration: underline;
+  font-size: 13px;
+}
+.column-resizer {
+  display: none;
+}
+@media (min-width: 901px) {
+  .work-columns {
+    grid-template-columns: var(--left-width, 240px) 10px minmax(0, 1fr) 10px var(
+        --right-width,
+        340px
+      );
+  }
+  .work-columns.left-collapsed {
+    grid-template-columns: minmax(0, 1fr) 10px var(--right-width, 340px);
+  }
+  .work-columns.right-collapsed {
+    grid-template-columns: var(--left-width, 240px) 10px minmax(0, 1fr);
+  }
+  .work-columns.left-collapsed.right-collapsed {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .column-resizer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: col-resize;
+    touch-action: none;
+    background: #f0f3f8;
+    outline-offset: -2px;
+    z-index: 2;
+  }
+  .column-resizer span {
+    width: 3px;
+    height: 40px;
+    border-radius: 6px;
+    background: #aab8d0;
+  }
+  .column-resizer:hover,
+  .column-resizer:focus-visible {
+    background: #dce8fc;
+    outline: 2px solid #6a92dd;
+  }
+  .column-resizer:hover span,
+  .column-resizer:focus-visible span {
+    background: #537fc9;
+  }
+  .work-columns.is-resizing,
+  .work-columns.is-resizing * {
+    cursor: col-resize !important;
+    user-select: none;
+  }
+}
+@media (max-width: 900px) {
+  .workflow-guide {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+  .workflow-guide > div {
+    min-width: 100%;
+  }
+  .workspace-contextbar {
+    height: auto;
+    min-height: 42px;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .workspace-topbar {
+    gap: 7px;
+  }
+  .workspace-top-actions {
+    gap: 9px;
+  }
+  .workspace-top-actions > .top-action {
+    font-size: 13px;
+  }
+}

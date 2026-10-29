@@ -1,0 +1,242 @@
+/* Readability and feedback at desktop working distances. */
+.backup-import {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  color: #6b81aa;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.backup-import input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  max-width: 100%;
+}
+.object-title h3 {
+  font-size: 16px;
+  color: #253653;
+}
+.object-main > p {
+  font-size: 16px;
+  color: #4f5e77;
+}
+.scope-note {
+  font-size: 15px;
+  color: #66758d;
+}
+.item-tags {
+  font-size: 13px;
+  color: #75839a;
+}
+.item-actions .text-button,
+.confirm-button {
+  font-size: 14px;
+}
+.reference-button {
+  font-size: 13px;
+  color: #5573a9;
+}
+.source-tile strong {
+  font-size: 15px;
+  color: #344864;
+}
+.source-tile small {
+  font-size: 13px;
+  color: #7b8ba5;
+}
+.source-original {
+  font-size: 16px;
+  color: #55647b;
+}
+.jd-block textarea {
+  font-size: 16px;
+  color: #455775;
+}
+.jd-paper-header p {
+  font-size: 14px;
+  color: #7585a2;
+}
+.selection-context strong {
+  font-size: 15px;
+  color: #4f6790;
+}
+.selection-context span {
+  font-size: 13px;
+  color: #798aa5;
+}
+.intent-label {
+  font-size: 15px;
+  color: #536781;
+}
+.review-body > .field {
+  font-size: 15px;
+  color: #42536e;
+}
+.review-body > p.tiny {
+  font-size: 13px;
+  color: #7b8ba6;
+}
+.ai-request-actions button[data-slot='button'] {
+  font-size: 14px;
+}
+.suggestion-change h4 {
+  font-size: 15px;
+  color: #405777;
+}
+.suggestion-change > p {
+  font-size: 15px;
+  color: #6c7d98;
+}
+.suggestion-group-reason {
+  font-size: 14px;
+  color: #7a8ba7;
+}
+.diff-grid {
+  font-size: 15px;
+}
+.diff-label {
+  font-size: 13px;
+}
+.question-title strong {
+  font-size: 15px;
+  color: #4d607d;
+}
+.question-detail {
+  font-size: 15px;
+  color: #6d7f99;
+}
+.question-tags {
+  font-size: 12px;
+  color: #7b8ba4;
+}
+.right-note {
+  font-size: 14px;
+  color: #937e4b;
+}
+.tiny-label {
+  font-size: 13px;
+  color: #7285a2;
+}
+.tiny-label .field {
+  font-size: 15px;
+}
+.comment-card p {
+  font-size: 15px;
+  color: #62748f;
+}
+.review-tabs button {
+  font-size: 14px;
+}
+.questions-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.questions-toolbar label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: #8092ad;
+}
+.questions-toolbar .text-button {
+  font-size: 14px;
+}
+.citation-edit-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  color: #7588a8;
+  border-bottom: 1px solid #e8edf6;
+  padding: 8px 0;
+}
+.citation-edit-row > span {
+  min-width: 0;
+}
+.citation-edit-row small {
+  display: block;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #8b9bb4;
+  max-height: 80px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  margin-top: 5px;
+}
+.citation-edit-row button {
+  white-space: nowrap;
+}
+.citation-original {
+  background: #f7f9fd;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  line-height: 1.9;
+  color: #7b8daa;
+  max-height: 160px;
+  overflow: auto;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.recently-updated {
+  animation: work-local-flash 900ms ease-out;
+}
+.source-highlight {
+  background: transparent;
+  color: inherit;
+}
+@keyframes work-local-flash {
+  0%,
+  15% {
+    background: #e7f5ec;
+    box-shadow: 0 0 0 2px #a5d5ba;
+  }
+  100% {
+    background: inherit;
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+@keyframes source-flash {
+  0%,
+  30% {
+    background: #ffe298;
+    box-shadow: 0 0 0 3px #ffe9b3;
+  }
+  100% {
+    background: transparent;
+    box-shadow: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .source-highlight {
+    background: #fff1b8;
+  }
+  .recently-updated {
+    outline: 1px solid #9bd0b4;
+  }
+}
+@media (max-width: 600px) {
+  .object-main > p {
+    font-size: 15px;
+  }
+  .object-title h3 {
+    font-size: 15px;
+  }
+  .scope-note {
+    font-size: 14px;
+  }
+  .source-original {
+    font-size: 16px;
+  }
+  .review-tabs button {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,235 @@
+.decision-input {
+  min-width: 0;
+  margin: 14px 0;
+  padding: 15px;
+  border: 1px solid #d2ded8;
+  border-radius: 10px;
+  background: #fbfdfc;
+}
+.decision-input legend {
+  padding: 0 5px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #21493e;
+}
+.decision-effect {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #586d67;
+  margin-bottom: 12px;
+}
+.decision-business-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+  gap: 10px;
+}
+.decision-business-card {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 10px;
+  padding: 14px !important;
+  border: 1px solid #c8d8cf;
+  border-radius: 9px;
+  background: white;
+  color: #213d33;
+  cursor: pointer;
+  min-width: 0;
+}
+.decision-business-card input {
+  flex: 0 0 auto;
+  margin-top: 5px;
+  width: 17px;
+  height: 17px;
+  accent-color: #176653;
+}
+.decision-business-card span {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.decision-input input[type='radio'],
+.decision-input input[type='checkbox'] {
+  width: 17px;
+  height: 17px;
+  min-height: 0;
+  padding: 0;
+  flex: 0 0 17px;
+}
+.decision-business-card strong {
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+.decision-business-card small {
+  color: #536d63;
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.decision-business-card em {
+  color: #5f776f;
+  font-style: normal;
+  font-size: 12px;
+}
+.decision-business-card:has(input:checked) {
+  border-color: #176653;
+  background: #eaf6ef;
+  box-shadow: 0 0 0 1px #176653;
+}
+.decision-business-card:focus-within {
+  outline: 2px solid #176653;
+  outline-offset: 3px;
+}
+.decision-auxiliary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 12px 18px;
+  margin: 15px 0;
+  font-size: 13px;
+  color: #435f54;
+}
+.decision-auxiliary label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 5px;
+  cursor: pointer;
+}
+.decision-auxiliary details {
+  padding: 5px;
+}
+.decision-auxiliary details summary {
+  font-size: 13px;
+  font-weight: 400;
+}
+.decision-input > button,
+.decision-auxiliary > button,
+.decision-incomplete button,
+.decision-cancel,
+.decision-known button {
+  padding: 8px 12px;
+  min-height: 36px;
+  border: 1px solid #a9c3b5;
+  background: #fff;
+  color: #176653;
+  border-radius: 7px;
+  margin: 6px 8px 4px 0;
+  font-size: 14px;
+}
+.decision-input > button {
+  background: #176653;
+  color: white;
+  border-color: #176653;
+}
+.decision-input textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-top: 7px;
+  border: 1px solid #b6c9bd;
+  border-radius: 7px;
+  padding: 10px;
+  background: white;
+  color: #213d33;
+}
+.decision-incomplete,
+.decision-review {
+  padding: 13px;
+  border: 1px solid #dfc785;
+  border-radius: 8px;
+  background: #fff8e9;
+  color: #76521e;
+  line-height: 1.8;
+}
+.decision-incomplete p {
+  margin: 6px 0;
+  font-size: 13px;
+}
+.decision-known {
+  padding: 14px;
+  background: #eaf5f0;
+  border: 1px solid #b7d8c8;
+  border-radius: 8px;
+  line-height: 1.8;
+}
+.decision-repair-message,
+.decision-explanation,
+.decision-recommendation {
+  line-height: 1.8;
+  font-size: 14px;
+  margin: 12px 0;
+}
+.decision-repair-message {
+  color: #6b5429;
+  background: #fff6df;
+  border: 1px solid #e5d2a7;
+  border-radius: 7px;
+  padding: 10px;
+}
+.decision-saved {
+  display: block;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 10px;
+  color: #486859;
+}
+@media (max-width: 700px) {
+  .decision-input {
+    padding: 10px;
+  }
+  .decision-business-options {
+    grid-template-columns: 1fr;
+  }
+}
+.decision-references {
+  margin-block: 1rem;
+  padding: 1rem;
+  border: 1px solid #cbd5db;
+  border-radius: 12px;
+  background: #f8fafb;
+  color: #17334a;
+}
+.decision-references > summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.decision-references article {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d7e1e5;
+  overflow-wrap: anywhere;
+}
+.decision-references article p {
+  margin-block: 0.5rem;
+}
+.repairable-decision:focus-visible {
+  outline: 3px solid #168779;
+  outline-offset: 5px;
+  border-radius: 8px;
+}
+.workbench-image-preview {
+  margin: 0;
+  padding: 12px;
+  border: 1px solid #c7d8ce;
+  border-radius: 10px;
+  background: #f3f8f5;
+}
+.workbench-image-preview img {
+  display: block;
+  max-width: 100%;
+  max-height: 360px;
+  object-fit: contain;
+  margin: auto;
+}
+.workbench-image-preview figcaption {
+  font-size: 13px;
+  color: #3b5a54;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+  margin-top: 10px;
+}

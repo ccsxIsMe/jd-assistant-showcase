@@ -1,0 +1,65 @@
+{
+  "fixture": "software-engineer",
+  "version": 1,
+  "notice": "示例项目｜虚构材料｜预置分析结果",
+  "objective": "我们要招聘一位软件工程师，为小团队开发问题追踪系统：能创建问题、更新状态、按条件搜索并导出列表。希望明确工作任务和能实际交付的工程能力。",
+  "files": [
+    {
+      "name": "reference.html",
+      "size": 3821,
+      "sha256": "c3e4952cf7bb5d93a7c6e83900aa9454c17938c8df253b4f3e01facb45932a26"
+    },
+    {
+      "name": "software-brief.docx",
+      "size": 10721,
+      "sha256": "84fa8961cedebad6f42ad11005052b7c6dbc874da8ceb9fab619de79ec042aae"
+    },
+    {
+      "name": "software-resume.docx",
+      "size": 10456,
+      "sha256": "b51a5a35fc58d48919616326c35866bd14a5f4c3a897618673fca7f91dc7524d"
+    },
+    {
+      "name": "resume.txt",
+      "size": 863,
+      "sha256": "752415b10eb50e01df5a189682d62ceae13d590410b2ced981f0b4217d125280"
+    },
+    {
+      "name": "interface.png",
+      "size": 66948,
+      "sha256": "83e341df360399374eae27ded5b866d0f455ad3b53f818d690f342ebc95ce177"
+    }
+  ],
+  "image": {
+    "width": 1000,
+    "height": 720,
+    "regions": [
+      {
+        "key": "signup",
+        "x": 0.062,
+        "y": 0.5741536458333333,
+        "width": 0.45421875,
+        "height": 0.06527777777777778
+      },
+      {
+        "key": "capacity",
+        "x": 0.062,
+        "y": 0.7033203125,
+        "width": 0.45421875,
+        "height": 0.09027777777777778
+      },
+      {
+        "key": "export",
+        "x": 0.58421875,
+        "y": 0.4663845486111111,
+        "width": 0.35378125,
+        "height": 0.06527777777777778
+      }
+    ]
+  },
+  "capabilities": {
+    "web": "内部可信静态资源，不经过任意URL抓取",
+    "document": "DOCX已用Mammoth实际解析核对",
+    "image": "程序生成的已知区域，不声称视觉模型识别"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "task": "exploreRequirements",
+  "promptVersion": "exploreRequirements@1.2.0",
+  "input": {
+    "projectId": "fictional-exploration",
+    "revision": 1,
+    "mode": "example",
+    "consent": true,
+    "sources": [
+      {
+        "id": "source-idea",
+        "title": "用户想法（虚构）",
+        "kind": "text",
+        "purpose": "main",
+        "borrow": "",
+        "avoid": "",
+        "referencePurpose": "",
+        "status": "ready",
+        "error": "",
+        "removed": false,
+        "linkedSourceId": null,
+        "createdAt": "2026-10-24T10:00:00Z",
+        "versions": [
+          {
+            "revision": 1,
+            "createdAt": "2026-10-24T10:00:00Z",
+            "text": "希望实时预览",
+            "paragraphs": [
+              {
+                "id": "paragraph-idea",
+                "text": "希望实时预览",
+                "origin": "user"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "evidenceId": "evidence-idea",
+        "sourceId": "source-idea",
+        "sourceRevision": 1,
+        "evidenceType": "user-description",
+        "title": "用户想法 · 原文",
+        "excerpt": "希望实时预览",
+        "location": {
+          "kind": "text",
+          "paragraphId": "paragraph-idea",
+          "start": 0,
+          "end": 6
+        },
+        "createdAt": "2026-10-24T10:00:00Z",
+        "verificationStatus": "verified",
+        "relatedFindingIds": []
+      }
+    ],
+    "confirmedFindings": [],
+    "overview": {
+      "goal": "",
+      "problem": "",
+      "users": "",
+      "outcome": "",
+      "constraints": "",
+      "evidenceIds": [],
+      "inferredFields": []
+    },
+    "questions": []
+  },
+  "output": {
+    "overview": {
+      "goal": "支持实时预览",
+      "problem": "",
+      "users": "",
+      "outcome": "",
+      "constraints": "",
+      "evidenceIds": ["evidence-idea"],
+      "inferredFields": []
+    },
+    "findings": [
+      {
+        "key": "feature-preview",
+        "parentKey": null,
+        "kind": "feature",
+        "title": "实时预览",
+        "description": "用户希望产品提供实时预览。",
+        "behavior": "实时查看当前内容",
+        "outcome": "具体预览对象及验收方式待确认",
+        "basis": "explicit",
+        "priority": "medium",
+        "phase": "mvp",
+        "evidenceIds": ["evidence-idea"]
+      }
+    ],
+    "questions": [
+      {
+        "title": "首版主要预览什么内容？",
+        "detail": "这是待比较的内容方向建议，不预先确认用户类型。",
+        "findingKeys": ["feature-preview"],
+        "evidenceIds": ["evidence-idea"],
+        "choices": [
+          {
+            "label": "文字内容的即时预览",
+            "id": "text-preview",
+            "sourceType": "ai_suggestion",
+            "impact": "侧重编辑文字与呈现效果"
+          },
+          {
+            "label": "版面布局的即时预览",
+            "id": "layout-preview",
+            "sourceType": "ai_suggestion",
+            "impact": "侧重布局调整与呈现效果"
+          }
+        ]
+      }
+    ],
+    "notice": "演示数据，非真实AI分析。候选需求仍须人工确认。"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "name": "generateJdDraft",
+  "promptVersion": "generateJdDraft@1.2.0",
+  "inputExample": {
+    "title": "前端工程师",
+    "sources": [
+      {
+        "id": "source-project",
+        "title": "项目说明",
+        "type": "project",
+        "person": "示例负责人（虚构）",
+        "createdAt": "2026-10-24T00:00:00.000Z",
+        "removed": false,
+        "versions": [
+          {
+            "revision": 1,
+            "text": "需要完成订单列表和订单详情页面。",
+            "createdAt": "2026-10-24T00:00:00.000Z"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "task-pages",
+        "kind": "task",
+        "revision": 1,
+        "title": "订单页面建设",
+        "text": "完成订单列表和订单详情页面。",
+        "scope": "仅前端页面",
+        "category": "must",
+        "priority": "medium",
+        "status": "confirmed",
+        "locked": false,
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。",
+            "start": 0,
+            "verified": true
+          }
+        ],
+        "taskIds": [],
+        "requirementIds": [],
+        "origin": "user",
+        "lastChange": "2026-10-24T00:00:00.000Z"
+      }
+    ],
+    "answeredQuestions": [],
+    "decisions": [],
+    "generationMode": "initial"
+  },
+  "outputExample": {
+    "blocks": [
+      {
+        "title": "主要职责",
+        "text": "- 完成订单列表和订单详情页面。",
+        "taskIds": ["task-pages"],
+        "requirementIds": [],
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。"
+          }
+        ]
+      }
+    ],
+    "questions": [],
+    "notice": "这是待人审核的JD草稿。"
+  }
+}

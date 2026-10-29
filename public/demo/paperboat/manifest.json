@@ -1,0 +1,65 @@
+{
+  "fixture": "paperboat",
+  "version": 1,
+  "notice": "示例项目｜虚构材料｜预置分析结果",
+  "objective": "我们是纸舟活动工作室，希望做一个轻量活动报名与管理网站：用户能浏览活动、报名，运营能管理名额、查看名单并导出。团队缺少技术经验，不清楚首版范围和需要什么人。",
+  "files": [
+    {
+      "name": "reference.html",
+      "size": 3814,
+      "sha256": "49a24e333f4ffd7c51ac5d447ed4fa6916d0715b527dd59adebf2c62dc8ab04b"
+    },
+    {
+      "name": "paperboat-brief.docx",
+      "size": 10646,
+      "sha256": "4283367340040834f0b0a806fceb34921a832c90064a2d5b41e892b232b18447"
+    },
+    {
+      "name": "paperboat-resume.docx",
+      "size": 10355,
+      "sha256": "e28a27f7267d773e47dabf7ca6e915cb81a0c9df368e435f455485556c248c50"
+    },
+    {
+      "name": "resume.txt",
+      "size": 751,
+      "sha256": "833469171aa6bfb430b92c02873a8567c80a29f0f975ed1f8d6ea0941bbf93d9"
+    },
+    {
+      "name": "interface.png",
+      "size": 64648,
+      "sha256": "241813a609f0a73095213e4ff1864d6c2e376e13c7ffec901137c1b530b7dfda"
+    }
+  ],
+  "image": {
+    "width": 1000,
+    "height": 720,
+    "regions": [
+      {
+        "key": "signup",
+        "x": 0.062,
+        "y": 0.5741536458333333,
+        "width": 0.45421875,
+        "height": 0.06527777777777778
+      },
+      {
+        "key": "capacity",
+        "x": 0.062,
+        "y": 0.7033203125,
+        "width": 0.45421875,
+        "height": 0.09027777777777778
+      },
+      {
+        "key": "export",
+        "x": 0.58421875,
+        "y": 0.4663845486111111,
+        "width": 0.35378125,
+        "height": 0.06527777777777778
+      }
+    ]
+  },
+  "capabilities": {
+    "web": "内部可信静态资源，不经过任意URL抓取",
+    "document": "DOCX已用Mammoth实际解析核对",
+    "image": "程序生成的已知区域，不声称视觉模型识别"
+  }
+}

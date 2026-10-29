@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>星桥软件 · 本地模拟参考产品</title
+  ><style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #f0f5f5;
+      color: #203b45;
+      font:
+        16px 'Microsoft YaHei',
+        sans-serif;
+    }
+    nav {
+      height: 64px;
+      background: #0a1726;
+      color: #c3e6dc;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 38px;
+      align-items: center;
+    }
+    nav a {
+      color: inherit;
+      margin-left: 20px;
+      text-decoration: none;
+    }
+    header {
+      padding: 28px 38px 20px;
+    }
+    small {
+      font-size: 12px;
+      color: #637f82;
+    }
+    h1 {
+      font-size: 29px;
+      margin: 12px 0;
+    }
+    p {
+      line-height: 1.8;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 20px;
+      padding: 0 38px 24px;
+    }
+    .card {
+      background: white;
+      border: 1px solid #d3e2de;
+      padding: 23px;
+      border-radius: 12px;
+    }
+    .tag {
+      font-size: 12px;
+      color: #31745f;
+    }
+    h2 {
+      font-size: 20px;
+      margin: 8px 0 12px;
+    }
+    .pill {
+      display: inline-block;
+      padding: 9px 16px;
+      background: #bdf0de;
+      border-radius: 6px;
+      margin: 4px 8px 4px 0;
+      color: #194d3b;
+      text-decoration: none;
+    }
+    .row {
+      border-top: 1px solid #e5ece9;
+      padding: 13px 0;
+      font-size: 14px;
+    }
+    footer {
+      padding: 18px 38px;
+      border-top: 1px solid #d8e6e1;
+      color: #607b81;
+      font-size: 12px;
+    }
+    section {
+      scroll-margin: 20px;
+    }
+    @media (max-width: 650px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      nav {
+        padding: 0 20px;
+      }
+      header {
+        padding: 20px;
+      }
+      .grid {
+        padding: 0 20px 20px;
+      }
+    }
+  </style>
+  <nav>
+    <b>星桥软件 / ISSUE TRACKER</b
+    ><span><a href="#features">功能说明</a><a href="#export">文件导出</a></span>
+  </nav>
+  <header>
+    <small>本地模拟产品 · 虚构材料 · 非真实在线抓取</small>
+    <h1>让问题跟踪，清晰可验。</h1>
+    <p>界面示意资料，用于核对真实区域与功能边界，不是已上线的问题追踪系统。</p>
+  </header>
+  <main class="grid" id="features">
+    <section class="card" id="signup">
+      <span class="tag">工程侧 / 问题创建与跟踪</span>
+      <h2>问题追踪系统 · 模拟页面</h2>
+      <p>演示技术选择 · React / TypeScript<br />创建问题、更新状态、搜索并导出列表。</p>
+      <div data-region="signup"><a class="pill" href="#capacity">创建问题与状态规则</a></div>
+      <div class="row">标题、描述和优先级 · 表单字段待确认</div>
+      <div class="row" id="capacity" data-region="capacity">
+        问题状态：待处理（模拟记录）<br />谁可修改状态，由负责人确认。
+      </div>
+    </section>
+    <section class="card" id="export">
+      <span class="tag">协作侧 / 问题列表</span>
+      <h2>问题列表 · 界面示意</h2>
+      <div data-region="export"><a class="pill" href="#export-note">CSV导出说明</a></div>
+      <div class="row">ISSUE-001 · 待处理</div>
+      <div class="row">ISSUE-002 · 处理中</div>
+      <p id="export-note">筛选问题并导出CSV；接口、SQL和权限需要验收。</p>
+      <small>参考产品展示复杂审批和AI插件，不代表本项目首版需要。</small>
+    </section>
+  </main>
+  <footer>
+    这是可打开的本地模拟网页。顶部导航和页脚不是独立产品需求；未接入真实接口、数据库或身份认证服务。
+  </footer>
+</html>

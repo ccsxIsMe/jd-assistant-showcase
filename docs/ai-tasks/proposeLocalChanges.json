@@ -1,0 +1,144 @@
+{
+  "name": "proposeLocalChanges",
+  "promptVersion": "proposeLocalChanges@1.3.0",
+  "inputExample": {
+    "title": "前端工程师",
+    "sources": [
+      {
+        "id": "source-project",
+        "title": "项目说明",
+        "type": "project",
+        "person": "示例负责人（虚构）",
+        "createdAt": "2026-10-24T00:00:00.000Z",
+        "removed": false,
+        "versions": [
+          {
+            "revision": 1,
+            "text": "需要完成订单列表和订单详情页面。",
+            "createdAt": "2026-10-24T00:00:00.000Z"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "id": "task-pages",
+        "kind": "task",
+        "revision": 1,
+        "title": "订单页面建设",
+        "text": "完成订单列表和订单详情页面。",
+        "scope": "仅前端页面",
+        "category": "must",
+        "priority": "medium",
+        "status": "confirmed",
+        "locked": false,
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。",
+            "start": 0,
+            "verified": true
+          }
+        ],
+        "taskIds": [],
+        "requirementIds": [],
+        "origin": "user",
+        "lastChange": "2026-10-24T00:00:00.000Z"
+      }
+    ],
+    "answeredQuestions": [],
+    "decisions": [],
+    "target": {
+      "id": "task-pages",
+      "kind": "task",
+      "revision": 1,
+      "title": "订单页面建设",
+      "text": "完成订单列表和订单详情页面。",
+      "scope": "仅前端页面",
+      "category": "must",
+      "priority": "medium",
+      "status": "confirmed",
+      "locked": false,
+      "refs": [
+        {
+          "sourceId": "source-project",
+          "sourceRevision": 1,
+          "excerpt": "需要完成订单列表和订单详情页面。",
+          "start": 0,
+          "verified": true
+        }
+      ],
+      "taskIds": [],
+      "requirementIds": [],
+      "origin": "user",
+      "lastChange": "2026-10-24T00:00:00.000Z"
+    },
+    "intent": "明确只负责前端页面，与现有后端团队联调。",
+    "allowedItems": [
+      {
+        "id": "task-pages",
+        "kind": "task",
+        "revision": 1,
+        "title": "订单页面建设",
+        "text": "完成订单列表和订单详情页面。",
+        "scope": "仅前端页面",
+        "category": "must",
+        "priority": "medium",
+        "status": "confirmed",
+        "locked": false,
+        "refs": [
+          {
+            "sourceId": "source-project",
+            "sourceRevision": 1,
+            "excerpt": "需要完成订单列表和订单详情页面。",
+            "start": 0,
+            "verified": true
+          }
+        ],
+        "taskIds": [],
+        "requirementIds": [],
+        "origin": "user",
+        "lastChange": "2026-10-24T00:00:00.000Z"
+      }
+    ],
+    "lockedIds": []
+  },
+  "outputExample": {
+    "groups": [
+      {
+        "reason": "独立修改建议，可单独采纳",
+        "changes": [
+          {
+            "targetId": "task-pages",
+            "before": {
+              "title": "订单页面建设",
+              "text": "完成订单列表和订单详情页面。",
+              "scope": "仅前端页面",
+              "category": "must",
+              "priority": "medium"
+            },
+            "operation": "update",
+            "after": {
+              "title": "订单页面建设",
+              "text": "完成订单列表和订单详情页面。",
+              "scope": "仅前端页面；后端接口与数据库边界待负责人确认",
+              "category": "must",
+              "priority": "medium"
+            },
+            "reason": "已有资料支持页面交付，但没有支持独立后端职责，建议明确边界并保留待确认事项。",
+            "refs": [
+              {
+                "sourceId": "source-project",
+                "sourceRevision": 1,
+                "excerpt": "需要完成订单列表和订单详情页面。"
+              }
+            ],
+            "impactIds": []
+          }
+        ]
+      }
+    ],
+    "notice": "预览不会修改任何数据。"
+  }
+}

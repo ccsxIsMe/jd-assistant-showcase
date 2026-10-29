@@ -1,0 +1,114 @@
+@import 'tailwindcss' source('../');
+@theme inline {
+  --font-sans: Arial, 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}
+:root {
+  --background: #f5f7f8;
+  --foreground: #172c34;
+  --radius: 0.75rem;
+}
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, 'Microsoft YaHei', 'PingFang SC', sans-serif;
+}
+button,
+a,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+.field {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: white;
+  padding: 0.65rem 0.8rem;
+  color: #1e293b;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.field:focus-visible {
+  outline: 2px solid #0f766e;
+  outline-offset: 2px;
+}
+.field:disabled {
+  background: #f8fafc;
+  opacity: 0.65;
+}
+.business-grid {
+  display: grid;
+  align-items: start;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 1280px) {
+  .business-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+.markdown {
+  overflow-wrap: anywhere;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: #334155;
+}
+.markdown h1 {
+  font-size: 1.35rem;
+  font-weight: 650;
+  margin: 1rem 0;
+}
+.markdown h2 {
+  font-size: 1.05rem;
+  font-weight: 650;
+  margin: 1.4rem 0 0.7rem;
+  color: #134e4a;
+}
+.markdown h3 {
+  font-weight: 600;
+  margin: 1rem 0 0.5rem;
+}
+.markdown p {
+  margin: 0.7rem 0;
+}
+.markdown ul {
+  list-style: disc;
+  padding-left: 1.4rem;
+}
+.markdown ol {
+  list-style: decimal;
+  padding-left: 1.4rem;
+}
+.markdown li {
+  margin: 0.4rem 0;
+}
+.markdown blockquote {
+  border-left: 3px solid #99d5cf;
+  padding-left: 1rem;
+}
+.markdown pre {
+  overflow: auto;
+  background: #f1f5f9;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.markdown a {
+  color: #0f766e;
+  text-decoration: underline;
+}
+progress {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+progress::-webkit-progress-bar {
+  background: #d6e5e3;
+}
+progress::-webkit-progress-value {
+  background: #0f766e;
+}
