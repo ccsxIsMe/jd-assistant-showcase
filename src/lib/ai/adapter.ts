@@ -15,6 +15,10 @@ type JsonCall = {
   maxTokens?: number;
   images?: { data: Uint8Array; mime: string }[];
 };
+/**
+ * 服务端共用的 JSON 调用边界：这里只校验传输与任务 Schema。
+ * 引用、锁定和对象范围由各业务服务继续校验，通过不代表已经人工确认。
+ */
 export async function callDeepSeekJSON(call: JsonCall): Promise<unknown> {
   function checked(raw: unknown) {
     const parsed = call.schema.safeParse(normalizeDecisionOutput(raw));
@@ -58,10 +62,12 @@ export async function callDeepSeekJSON(call: JsonCall): Promise<unknown> {
         : { prompt: JSON.stringify(call.input) }),
       output: Output.json(),
       abortSignal: call.signal,
+      // 禁止 SDK 隐式重试；是否允许一次结构修复由上层任务控制。
       maxRetries: 0,
       maxOutputTokens: call.maxTokens ?? 10000,
       providerOptions: { deepseek: { thinking: { type: 'disabled' } } },
     });
+    // 截断内容不能作为完整报告，也不能通过补括号伪造成功结果。
     if (result.finishReason === 'length')
       throw new ModelError('OUTPUT_TRUNCATED', '模型输出被截断，请减少单次分析材料后重试。', 422);
     if (result.finishReason !== 'stop')
@@ -75,6 +81,7 @@ export async function callDeepSeekJSON(call: JsonCall): Promise<unknown> {
       error.finishReason === 'stop' &&
       error.text?.trim()
     ) {
+      // 只接收正常结束的完整 JSON；允许移除外层代码围栏，不修造字段内容。
       let recovered: unknown;
       try {
         recovered = decodeJSONEnvelope(error.text);
@@ -106,6 +113,7 @@ export async function callDeepSeekJSON(call: JsonCall): Promise<unknown> {
     throw modelError(error, call.signal);
   }
 }
+/** 固定无敏感样例；此函数仍会访问真实服务，不能当作免费 mock 测试。 */
 export async function testDeepSeekConnection(signal: AbortSignal) {
   const schema = z.object({ ok: z.literal(true) }).strict();
   await callDeepSeekJSON({

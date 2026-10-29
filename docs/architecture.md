@@ -43,3 +43,9 @@ flowchart TD
 同一IndexedDB v3包含workspaces、explorations、exploration-assets、resume-reviews和demo-instances。Blob资产与结构状态分开保存。草稿自动保存用于恢复编辑，手动快照是不可变历史版本；下游岗位保留来源快照并独立编辑，上游更新只显示差异。
 
 示例模式使用显式预置响应，同样经过业务校验，页面与导出标识演示数据。真实模式缺配置、超时或引用错误时不回退预置。公开配置样例不包含凭据。
+
+## 数据兼容与代码阅读
+
+IndexedDB v3通过加法创建新Store，保留原岗位、研究与附件；旧快照读取只恢复实际保存的状态，不补造历史。旧generate/optimize入口按上下文转入岗位，explore经典资料页及纸舟fixture仍用于历史数据与回归兼容。当前展示以软件工程师案例为准。
+
+关键模块的职责、注释约定与修改边界见[代码阅读指南](code-guide.md)。

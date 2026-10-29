@@ -17,6 +17,7 @@ export const PARSER_VERSIONS = {
   materials: 'materials@1.0.0',
   evidence: 'evidence@1.0.0',
 };
+/** 业务研究变更指纹排除 lab.ui；画布筛选等视图变化不代表研究结论变化。 */
 export function researchSignature(p: Exploration) {
   const text = JSON.stringify([
     p.title,
@@ -58,6 +59,7 @@ export function assetReferences(value: {
     ),
   ];
 }
+/** 深拷贝可回看的研究状态；附件仅保存引用及缺失说明，不复制二进制到每个快照。 */
 export function captureResearch(p: Exploration, availableAssets?: Set<string>): ResearchState {
   const assetIds = assetReferences(p);
   const missing = availableAssets ? assetIds.filter((id) => !availableAssets.has(id)) : assetIds;
@@ -129,6 +131,7 @@ export function fullResearch(snapshot: Snapshot): ResearchState {
     },
   };
 }
+/** 基于快照派生新草稿并重绑所属项目；历史内容不原地修改，旧模型请求不恢复。 */
 export function forkResearch(snapshot: Snapshot, title: string, independent = false): Exploration {
   const state = fullResearch(snapshot);
   const p = newExploration(title.trim() || snapshot.title);

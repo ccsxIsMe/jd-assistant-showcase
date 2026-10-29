@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { explorationSchema, type Exploration } from '@/lib/exploration/model';
 import { explorationStore, PROJECT_LIFECYCLE_CHANNEL } from '@/lib/exploration/storage';
 import { recordResearchChange } from '@/lib/exploration/journal';
+/** 研究草稿的内存状态与串行保存队列；保存失败仍保留 current，允许重试或导出。 */
 export function useExploration(id: string, debounceMs = 0) {
   const [project, setProject] = useState<Exploration | null>(null);
   const current = useRef<Exploration | null>(null);
@@ -64,6 +65,7 @@ export function useExploration(id: string, debounceMs = 0) {
       .then(async () => {
         try {
           await explorationStore.save(p);
+          // 旧写入完成不能把尚未落盘的新编辑误报为“已保存”。
           if (mounted.current && saveSequence.current === sequence) setSaveState('saved');
         } catch (e) {
           if (mounted.current) {
@@ -144,6 +146,7 @@ export function useExploration(id: string, debounceMs = 0) {
     },
   };
 }
+/** 只读取本机 Blob；切换附件或卸载时释放对象 URL，迟到读取不更新旧预览。 */
 export function useAssetURL(id: string | undefined | null) {
   const [state, setState] = useState<{ id: string; url: string; error: string } | null>(null);
   useEffect(() => {

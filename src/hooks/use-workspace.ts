@@ -3,6 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { workspaceStore } from '@/lib/workbench/storage';
 import { refreshSuggestions } from '@/lib/workbench/domain';
 import { workspaceSchema, type Workspace } from '@/lib/workbench/model';
+/** 岗位编辑先校验内存副本，再串行持久化；失败保留编辑，不显示虚假保存成功。 */
 export function useWorkspace(id: string) {
   const [workspace, setWorkspace] = useState<Workspace | null>(null);
   const current = useRef<Workspace | null>(null);
@@ -38,6 +39,7 @@ export function useWorkspace(id: string) {
       .then(async () => {
         try {
           await workspaceStore.save(w);
+          // 仅最新保存序列可更新状态，避免前一版本的完成事件覆盖当前保存提示。
           if (mounted.current && sequence === saveSequence.current) {
             setSaveState('saved');
           }

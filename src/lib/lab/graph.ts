@@ -14,6 +14,7 @@ export const sourceNodeId = (id: string) => `source:${id}`;
 export const evidenceNodeId = (id: string) => `evidence:${id}`;
 export const findingNodeId = (id: string) => `finding:${id}`;
 export const questionNodeId = (id: string) => `question:${id}`;
+/** 轻量变更指纹，仅用于本机版本比较与去重，不是安全哈希或内容真实性证明。 */
 export function digest(value: unknown) {
   const text = JSON.stringify(value);
   let hash = 2166136261;
@@ -39,6 +40,7 @@ export function evidenceFingerprint(p: Exploration, ids: string[]) {
     }),
   );
 }
+/** 在锚点附近寻找空位，只返回新坐标，不移动已有节点。 */
 export function nearbyPosition(nodes: GraphNode[], desired: { x: number; y: number }) {
   for (let ring = 0; ring < 50; ring++) {
     const offsets: { x: number; y: number }[] = [];
@@ -64,6 +66,7 @@ export function nearbyPosition(nodes: GraphNode[], desired: { x: number; y: numb
   }
   throw new Error('局部空间已满，请手动整理或派生新的研究。');
 }
+/** 强度取决于可定位证据与程序/人工核对，模型自报置信度不参与升级。 */
 export function edgeStrength(
   p: Exploration,
   edge: Pick<
@@ -141,6 +144,10 @@ export function validateEdge(p: Exploration, lab: LabState, edge: GraphEdge) {
   )
     throw new Error('强关联必须有已定位直接依据，不能仅依赖模型判断。');
 }
+/**
+ * 在研究副本上同步业务对象与图谱投影；复用稳定节点 ID 和已有坐标。
+ * 同步会标记失效依赖，不能用作纯视图筛选，也不能把候选变成人工确认事实。
+ */
 export function synchronizeLab(project: Exploration): Exploration {
   const p = structuredClone(project);
   p.questions = reconcileDecisions(p.questions, p.id);
@@ -589,6 +596,7 @@ export function synchronizeLab(project: Exploration): Exploration {
   p.lab = labSchema.parse(lab);
   return p;
 }
+/** 折叠证据只映射显示端点，不删除底层节点、证据或关系。 */
 export function visibleGraph(lab: LabState) {
   const visible = lab.nodes.filter((n) => n.type !== 'evidence' || n.content.independent);
   const ids = new Set(visible.map((n) => n.id));

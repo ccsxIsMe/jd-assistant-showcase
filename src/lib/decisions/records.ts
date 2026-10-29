@@ -6,8 +6,8 @@ type RecordQuestion = DecisionQuestion & {
   targetIds?: string[];
   refs?: { sourceId: string; sourceRevision?: number }[];
 };
-// A topic/title alone never establishes identity. Owner + affected entity + phase +
-// perspective + decision dimension must all agree. Unknown scope stays separate.
+// 标题相似不能决定合并：所属项目、关联对象、阶段、视角与决策维度都须一致。
+// 范围无法证明一致时保持独立，避免把不同岗位或参考产品的问题误合并。
 export function decisionIdentity(q: RecordQuestion, ownerId: string) {
   const scope = q.decisionSpec?.scope;
   const objects = [
@@ -37,6 +37,7 @@ export function decisionIdentity(q: RecordQuestion, ownerId: string) {
   if (!dimension) return null;
   return JSON.stringify([ownerId, objects, phase, perspective, normalizeText(dimension)]);
 }
+/** 旧问题 ID 仍可用于图谱引用，但实时读写应解析到唯一 canonicalId；拒绝别名环。 */
 export function resolveDecision<T extends RecordQuestion>(
   questions: T[],
   id: string,
@@ -53,6 +54,7 @@ export function resolveDecision<T extends RecordQuestion>(
 export function currentDecisions<T extends RecordQuestion>(questions: T[]): T[] {
   return questions.filter((q) => !q.decision?.canonicalId || q.decision.canonicalId === q.id);
 }
+/** 兼容旧重复问题：保留原答案历史，冲突答案标记复核，不擅自挑选新答案。 */
 export function reconcileDecisions<T extends RecordQuestion>(questions: T[], ownerId: string): T[] {
   const result = structuredClone(questions);
   const answered = (q: RecordQuestion) =>
@@ -124,8 +126,7 @@ export function reconcileDecisions<T extends RecordQuestion>(questions: T[], own
       root.refs = [...root.refs, ...(q.refs ?? [])].filter(
         (v, i, a) => a.findIndex((other) => JSON.stringify(other) === JSON.stringify(v)) === i,
       );
-    // Alias records retain original content solely as migration history. All live
-    // reads/writes resolve through canonicalId; existing graph IDs/edges survive.
+    // 别名记录只保留迁移原文；图谱 ID 与连线不用重建，回答统一写入主记录。
     q.decision = { ...q.decision!, canonicalId: root.id };
   }
   return result;

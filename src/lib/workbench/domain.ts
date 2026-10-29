@@ -245,6 +245,7 @@ export function addSuggestions(w: Workspace, suggestions: Suggestion[]) {
   log(n, '收到修改建议，等待人工审阅，尚未修改正文');
   return touch(n);
 }
+/** 整组预检后在副本中应用；锁定或过期则抛错，不会向调用方返回半份修改。 */
 export function applySuggestion(
   w: Workspace,
   suggestionId: string,
@@ -267,6 +268,7 @@ export function applySuggestion(
       (i.taskIds.some((id) => ids.has(id)) || i.requirementIds.some((id) => ids.has(id))),
   );
   const allIds = new Set([...ids, ...dependent.map((i) => i.id)]);
+  // 历史同时记录直接目标与需复核的依赖，撤销范围不包含无关岗位条目。
   const before = n.items.filter((i) => allIds.has(i.id)).map((i) => structuredClone(i));
   for (const c of s.changes) {
     const i = n.items.find((i) => i.id === c.targetId)!;
@@ -300,6 +302,7 @@ export function rejectSuggestion(w: Workspace, id: string) {
   log(n, '拒绝建议，保留审阅记录');
   return touch(n);
 }
+/** 撤销前比较受影响对象的当前值与操作后值，避免覆盖后续人工编辑。 */
 export function undoOperation(w: Workspace, id: string) {
   const n = structuredClone(w);
   const op = n.operations.find((o) => o.id === id);

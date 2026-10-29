@@ -1,6 +1,7 @@
 import { readdir, readFile, lstat } from 'node:fs/promises';
 import { spawnSync } from 'node:child_process';
 import { resolve, basename } from 'node:path';
+// 检查“将发布的文件”，不是扫描用户磁盘；支持 Git 克隆及不含 .git 的源码 ZIP。
 const root = process.cwd();
 if (JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8')).name !== 'jd-assistant')
   throw new Error('Run this check from the showcase project root.');
@@ -29,6 +30,7 @@ if (git.status === 0 && resolve(git.stdout.trim()) === resolve(root)) {
   }
   await walk();
 }
+// 仅输出文件名和规则，不打印命中片段。格式扫描不能替代真实配置的私有精确核验。
 const issues = [];
 for (const file of files) {
   const p = file.replaceAll('\\', '/'),

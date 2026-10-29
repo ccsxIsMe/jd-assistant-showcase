@@ -97,6 +97,7 @@ function taskForFeature(
   };
   return task;
 }
+/** 研究确认与岗位确认分开：保留来源快照/证据链，导入条目重新进入岗位待确认流程。 */
 export function importRequirementMaterial(
   workspace: Workspace,
   raw: unknown,
@@ -388,6 +389,7 @@ export type UpstreamEntry = {
   after: string;
   roleRequirementId?: string;
 };
+/** 只计算同谱系上游差异，标明本地编辑和锁定状态，不在比较时修改岗位正文。 */
 export function upstreamPlan(w: Workspace, record: ResearchImport, latest: RequirementMaterial) {
   validateMaterial(latest);
   if (latest.lineageRootId !== record.lineageRootId) throw new Error('上游研究谱系不匹配。');
@@ -458,6 +460,7 @@ export function upstreamPlan(w: Workspace, record: ResearchImport, latest: Requi
       JSON.stringify(record.material.constraints) !== JSON.stringify(latest.constraints),
   };
 }
+/** 用户选取同步范围后重新核对计划与目标版本，未选正文及本地锁定不能被静默覆盖。 */
 export function applyUpstreamPlan(
   workspace: Workspace,
   importId: string,

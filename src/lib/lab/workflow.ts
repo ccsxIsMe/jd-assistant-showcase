@@ -27,6 +27,7 @@ import { recordResearchChange } from '../exploration/journal';
 import type { LabStage, StageRun } from './model';
 import { selectAnalysisEvidence } from './evidence-selection';
 import { demoFixtureKey } from '../demo/identity';
+/** 按依赖对象生成版本指纹；无关对象变化不应让整次阶段响应失效。 */
 export function objectVersions(p: Exploration): Record<string, string> {
   return Object.fromEntries([
     ['overview', digest([p.overview, p.overviewRevision, p.overviewConfirmed])],
@@ -48,6 +49,7 @@ export function objectVersions(p: Exploration): Record<string, string> {
     ...(p.lab?.solutions ?? []).map((s) => [`solution:${s.id}`, String(s.revision)]),
   ]);
 }
+/** 从当前有效证据和所选证据链构建请求，限制文本与体积；不发送全部附件 Blob。 */
 export function buildLabRequest(
   project: Exploration,
   stage: LabStageRequest['stage'],
@@ -241,6 +243,10 @@ type Reply = {
   modelConfigId: string;
   mode: 'example' | 'real';
 };
+/**
+ * 合并仍有效的新增候选，保留人工编辑、排除与原有布局。
+ * 已取消/结束任务不再接收迟到响应；依赖版本改变的部分计入过期结果。
+ */
 export function mergeStageResult(
   project: Exploration,
   runId: string,
@@ -255,6 +261,7 @@ export function mergeStageResult(
   const run = p.lab!.runs.find((r) => r.id === runId);
   if (!run || run.status !== 'running') return p;
   const currentVersions = objectVersions(p);
+  // 比较请求时的对象版本，不仅比较整个项目 revision，允许无关编辑并行发生。
   const unchanged = (key: string) =>
     input.inputVersions[key] !== undefined && input.inputVersions[key] === currentVersions[key];
   const evidenceCurrent = (ids: string[]) =>

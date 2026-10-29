@@ -285,6 +285,10 @@ export function compactBoard(p: Exploration) {
     }
   });
 }
+/**
+ * 使用端点与关系类型去重。删除记录仍占据原 ID，重新分析不能静默复活它；
+ * 证据实质变化只提示可重新评估，恢复必须走明确的用户操作。
+ */
 export function mergeRelation(
   p: Exploration,
   proposal: Omit<

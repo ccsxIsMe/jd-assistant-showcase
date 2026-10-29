@@ -10,6 +10,7 @@ import { z } from 'zod';
 import { schemaIssues, type ValidationIssue } from './validation';
 import { finalizeDecisionQuestions } from './decision-service';
 import { workbenchAIContext } from '../decisions/context';
+/** 把独立提示词任务接入岗位协议；只返回候选，不在服务端写入岗位状态。 */
 export async function runWorkbenchAI(req: AIRequest, signal: AbortSignal) {
   const finish = async (data: ReturnType<typeof validateAIResult>) => ({
     ...data,
@@ -44,7 +45,7 @@ export async function runWorkbenchAI(req: AIRequest, signal: AbortSignal) {
   const { task, input } = prepared;
   let previousOutput: unknown;
   let issues: ValidationIssue[] = [];
-  // Only one bounded repair for invalid JSON/semantic structure. Never retry billing/auth/network errors.
+  // 最多追加一次结构/引用修复；认证、余额、网络等故障直接上报，避免重复计费。
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
       const raw = await callDeepSeekJSON({

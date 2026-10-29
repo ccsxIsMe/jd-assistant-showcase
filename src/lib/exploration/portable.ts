@@ -56,6 +56,7 @@ function base64(blob: Blob): Promise<string> {
     reader.readAsDataURL(blob);
   });
 }
+/** 便携导出时按引用收集并去重附件；Base64 只用于交换包，不是日常快照存储。 */
 export async function exportPackage(value: Exploration | Snapshot) {
   const assets = [];
   let size = 0;
@@ -84,6 +85,7 @@ export async function exportPackage(value: Exploration | Snapshot) {
     );
   return output;
 }
+/** 先校验结构，再校验跨记录 ID、来源版本及附件引用；合法 JSON 不等于合法研究包。 */
 export function parsePackage(text: string) {
   if (text.length > 95 * 1024 * 1024) throw new Error('导入包超过95MB限制。');
   const data = packageSchema.parse(JSON.parse(text));
@@ -141,6 +143,7 @@ export function parsePackage(text: string) {
     throw new Error('导入包附件缺失或重复。');
   return data;
 }
+/** 校验文件内容并重绑项目、快照、附件 ID 后原子写入独立副本，原记录保持不变。 */
 export async function importPackage(file: File) {
   if (file.size > 95 * 1024 * 1024) throw new Error('导入包超过95MB限制。');
   const data = parsePackage(await file.text());

@@ -34,6 +34,7 @@ const auxiliary =
   /^(其他(?:请填写|请补充)?|我不确定|不确定|以上(?:都|均)?不适用|暂时跳过|跳过|暂缓|other|unsure|noneoftheabove|skip)$/i;
 const vague =
   /^(方案[一二三四1234abcd]|选项[一二三四1234abcd]|根据情况|进一步研究|后续再说|待定|option[abcd1234])$/i;
+/** 只做结构与重复检查；通过本函数不代表选项的业务语义已经人工核实。 */
 export function businessChoices(choices: DecisionChoice[] = []) {
   const ids = new Set<string>(),
     labels = new Set<string>();
@@ -229,6 +230,7 @@ export function sameDecisionTopic(a: DecisionQuestion & { topic?: string }, b: D
       normalizeText(a.topic || a.decisionSpec!.topic) === normalizeText(b.decisionSpec.topic))
   );
 }
+/** 答案绑定稳定选项 ID 与版本快照；辅助动作有独立 kind，不计入业务选项。 */
 export function stampDecisionResponse(
   q: DecisionQuestion,
   value: DecisionResponse,
@@ -257,6 +259,7 @@ export function stampDecisionResponse(
     throw new Error('本题尚无可比较业务选项，不能记录为全部不适用。');
   return { ...value, questionVersion: version, optionsVersion, optionSnapshot: state.choices };
 }
+/** 重新生成选项会产生新版本；保留旧答案及其选项，提示复核而非自动映射。 */
 export function applyDecisionVersion<T extends DecisionQuestion>(
   q: T,
   replacement: DecisionQuestion,

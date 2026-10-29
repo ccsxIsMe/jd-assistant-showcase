@@ -11,6 +11,7 @@ import { aiOutputSchema, localRef, type AIRequest, type AIResult } from './ai-co
 import { newItem, now, uid, type Suggestion, type Workspace } from './model';
 import { allowedTargetItems } from './ai-scope';
 import { reconcileDecisions } from '../decisions/records';
+/** Schema 后的动作/目标门禁；选中范围、锁定及关联对象不能由模型扩大。 */
 export function validateAIResult(req: AIRequest, raw: unknown): AIResult {
   const data = aiOutputSchema.parse(raw);
   const { context } = req;
@@ -44,6 +45,7 @@ function refs(w: Workspace, citations: AIResult['tasks'][number]['refs']) {
     validateReference(w.sources, localRef(r.sourceId, r.sourceRevision, r.excerpt)),
   );
 }
+/** 建议 ID、基准版本和前置条件由程序绑定，模型只提供候选内容与理由。 */
 export function materializeSuggestions(
   base: Workspace,
   req: AIRequest,
@@ -77,6 +79,10 @@ export function materializeSuggestions(
     error: '',
   }));
 }
+/**
+ * 将已校验响应转换为候选。新增任务默认待确认，已有 JD 不被新草稿覆盖；
+ * 局部修改只进入建议列表，实际正文由人工采纳路径修改。
+ */
 export function ingestAI(
   current: Workspace,
   base: Workspace,

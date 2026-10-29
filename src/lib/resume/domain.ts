@@ -15,6 +15,7 @@ import {
 } from './model';
 export const RESUME_NOTICE =
   '仅核对简历写了什么。可定位不代表能力已核实；未找到描述不代表不具备，不作录用、淘汰或候选人排名。';
+/** 捕获本次核对所用岗位标准；报告保留该版本，后续岗位编辑不反向改写旧报告。 */
 export function standardFromWorkspace(w: Workspace, versionId?: string): Standard {
   const version = versionId ? w.versions.find((v) => v.id === versionId) : undefined;
   if (versionId && !version) throw new Error('所选岗位版本不存在；历史报告保留。');
@@ -123,6 +124,10 @@ export function editDirectRequirement(standard: Standard, id: string, text: stri
   next.capturedAt = now();
   return standardSchema.parse(next);
 }
+/**
+ * 遮盖常见身份字段并保持字符串长度，供引用定位复用原坐标。
+ * 这是有限的文本规则，不保证识别所有个人信息；发送前仍需用户审阅并确认。
+ */
 export function redactResume(text: string) {
   return text.replace(/[^\r\n]+/g, (line) =>
     /^(\s*)(姓名|性别|年龄|婚育|婚姻|民族|出生|生日|户籍|身份证|照片|电话|手机|邮箱|电子邮件|name|gender|age|marital|ethnicity|phone|email)\s*[:：]/i.test(
@@ -186,6 +191,7 @@ export function prepareResumeRequest(s: ReviewSession, consent: boolean): Resume
     ...(demoFixtureKey(s.demo) ? { fixture: demoFixtureKey(s.demo) } : {}),
   };
 }
+/** 每条标准均须覆盖；引用必须在本次段落唯一定位，“未找到”不等于不具备能力。 */
 export function validateResumeOutput(input: ResumeRequest, raw: unknown): ResumeOutput {
   const data = resumeOutputSchema.parse(raw),
     ids = new Set(input.standard.requirements.map((r) => r.id)),

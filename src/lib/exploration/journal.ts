@@ -34,6 +34,7 @@ function changes<T extends { id: string }>(before: T[], after: T[]) {
   );
   return { before: before.filter((v) => ids.has(v.id)), after: after.filter((v) => ids.has(v.id)) };
 }
+/** 记录对象级前后差异；不把整份项目或纯视图切换当作一次可覆盖全部数据的撤销。 */
 export function recordResearchChange(before: Exploration, next: Exploration, label: string) {
   const left: ResearchPatch = { findings: [], sources: [], evidence: [], questions: [] };
   const right = structuredClone(left);
@@ -88,6 +89,7 @@ export function recordResearchChange(before: Exploration, next: Exploration, lab
   p.activity = p.activity.slice(0, 300);
   return p;
 }
+/** 在副本中检查依赖与后续编辑；遇到冲突整次拒绝，不返回部分回滚状态。 */
 export function undoResearch(p: Exploration, operationId: string) {
   const n = structuredClone(p);
   const operation = n.operations?.find((o) => o.id === operationId);
@@ -185,6 +187,7 @@ export function undoResearch(p: Exploration, operationId: string) {
         const l = live as unknown as Record<string, unknown>,
           w = wanted as unknown as Record<string, unknown>,
           b = prior as unknown as Record<string, unknown> | undefined;
+        // 有前态时只比较本操作实际改过的字段，保留同一节点上无关的后续修改。
         const fields = b
           ? Object.keys(w).filter(
               (k) => !['revision', 'updatedAt'].includes(k) && !equal(b[k], w[k]),
@@ -247,6 +250,7 @@ export function undoResearch(p: Exploration, operationId: string) {
       .map((f) => f.id);
   return n;
 }
+/** 交换前后补丁复用同一冲突检查；出现新操作分支后，不重做旧分支。 */
 export function redoResearch(p: Exploration, operationId: string) {
   const n = structuredClone(p);
   const op = n.operations?.find((v) => v.id === operationId);

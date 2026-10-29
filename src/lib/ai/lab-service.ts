@@ -18,6 +18,10 @@ import {
 import { mockFeatures, mockLinks, mockRoles } from '../lab/mock';
 import { finalizeDecisionQuestions } from './decision-service';
 import { analysisDecisionContext } from '../decisions/context';
+/**
+ * 每次只处理请求指定的研究阶段；示例和真实输出都经过同一业务引用校验。
+ * 此处不修改浏览器草稿，客户端合并时还必须检查对象版本与取消状态。
+ */
 export async function runLabStage(raw: LabStageRequest, signal: AbortSignal): Promise<LabResult> {
   let input: LabStageRequest;
   try {
@@ -68,6 +72,7 @@ export async function runLabStage(raw: LabStageRequest, signal: AbortSignal): Pr
   }
   let previous: unknown = null;
   let issues: unknown = [];
+  // 真实阶段最多一次受控修复；不是整条研究流水线重跑，也不回退预置答案。
   for (let attempt = 0; attempt < (input.mode === 'example' ? 1 : 2); attempt++) {
     try {
       signal.throwIfAborted();

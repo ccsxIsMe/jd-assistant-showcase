@@ -14,6 +14,7 @@ const decompressors = {
   deflate: promisify(inflate),
   br: promisify(brotliDecompress),
 };
+/** 压缩前后均限制大小，避免小响应解压后占用无界内存。 */
 export async function decodePageBody(bytes: Buffer, encoding = 'identity') {
   if (bytes.byteLength > MAX_BYTES) throw new PublicError('网页响应超过3MB限制。', 413);
   const format = encoding.trim().toLowerCase();
@@ -82,7 +83,7 @@ async function resolveHost(hostname: string) {
 }
 function readPage(url: URL, pinned: Address, signal: AbortSignal): Promise<PageResponse> {
   return new Promise((resolve, reject) => {
-    // Pin the verified DNS answer on the actual connection. No secondary DNS lookup, proxy or pooled socket.
+    // 连接固定到已验证的 DNS 地址，避免校验后重新解析到内网；保留正常 TLS 校验。
     const request = (url.protocol === 'https:' ? httpsRequest : httpRequest)(
       url,
       {
@@ -204,6 +205,10 @@ export function extractHTML(bytes: Buffer, contentType = '') {
     screenshotStatus: 'not-available' as const,
   };
 }
+/**
+ * 受控读取静态公开 HTML：每次重定向重新校验 URL 与全部 DNS 结果。
+ * 不执行网页脚本、不绕过登录，也不把视频页面文字当成视频内容理解。
+ */
 export async function fetchPublicPage(
   value: string,
   signal: AbortSignal,

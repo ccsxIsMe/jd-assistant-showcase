@@ -7,6 +7,7 @@ import { workspaceSchema } from '../workbench/model';
 import { changeProjectTrash, validateProjectSave } from './lifecycle';
 import { reconcileDecisions } from '../decisions/records';
 
+/** 同一读写事务中读取当前版本再校验保存，避免读取与写入间穿插回收站操作。 */
 async function mutateProject(id: string, apply: (stored: Exploration | null) => Exploration) {
   const db = await database();
   return new Promise<Exploration>((resolve, reject) => {
@@ -85,6 +86,7 @@ export const explorationStore = {
     p.updatedAt = timestamp();
     await this.save(p);
   },
+  // 删除前检查其他草稿、快照及岗位导入链；只有无人引用的附件才在同一事务清理。
   async deleteSnapshot(projectId: string, snapshotId: string) {
     const db = await database();
     return new Promise<{ deletedAssets: number }>((resolve, reject) => {

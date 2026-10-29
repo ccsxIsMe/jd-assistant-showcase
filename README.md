@@ -73,7 +73,7 @@ tests/                   单元、浏览器与显式真实联调
 docs/                    架构、环境、测试与展示说明
 ```
 
-[系统架构与AI流程](docs/architecture.md) · [结构化任务样例](docs/ai-tasks/) · [环境与依赖](docs/environment.md) · [简历证据设计](docs/resume-evidence.md)
+[系统架构与AI流程](docs/architecture.md) · [代码阅读与关键注释](docs/code-guide.md) · [结构化任务样例](docs/ai-tasks/) · [环境与依赖](docs/environment.md) · [简历证据设计](docs/resume-evidence.md)
 
 ## 测试与代码规范
 

@@ -7,6 +7,10 @@ export class PublicError extends Error {
     super(message);
   }
 }
+/**
+ * 服务端配置读取；返回值含密钥，不得整体序列化到响应、日志或浏览器存储。
+ * env 参数用于隔离测试，不需要读取开发者的真实 .env.local。
+ */
 export function readConfig(env: Record<string, string | undefined> = process.env) {
   const parsed = modeSchema.safeParse(env.AI_MODE ?? 'mock');
   if (!parsed.success) throw new PublicError('AI_MODE 配置无效，应为 mock 或 real。', 503);

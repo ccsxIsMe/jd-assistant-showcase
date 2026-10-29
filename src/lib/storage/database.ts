@@ -1,4 +1,4 @@
-// One database, additive stores. Version 1 workspaces are kept intact.
+// 统一数据库仅加法升级；新建缺少的 Store，保留旧岗位、研究和附件记录。
 export const stores = [
   'workspaces',
   'explorations',
@@ -49,6 +49,7 @@ export async function readRecord<T>(store: StoreName, key?: string): Promise<T> 
     req.onerror = () => reject(new Error('读取本地资料失败；原始记录保留。'));
   });
 }
+/** 多 Store 原子写入：事务完成后才能显示“已保存”，单个 put 成功还不算保存成功。 */
 export async function writeRecords(entries: { store: StoreName; value: { id: string } }[]) {
   const db = await database();
   return new Promise<void>((resolve, reject) => {

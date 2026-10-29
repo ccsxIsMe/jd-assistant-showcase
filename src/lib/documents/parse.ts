@@ -3,6 +3,10 @@ import { validateExtractedText, validateFile } from './validation';
 export async function parseResume(file: File): Promise<string> {
   return (await parseDocumentDetails(file)).text;
 }
+/**
+ * 浏览器本地提取纯文本与 PDF 页码，先检查类型、大小和文件签名。
+ * 不执行文档 HTML、不做扫描件 OCR；空白/乱码由文本门禁拒绝后再让用户补充。
+ */
 export async function parseDocumentDetails(
   file: File,
 ): Promise<{ text: string; pages: { page: number; text: string }[]; pageCount?: number }> {
@@ -56,6 +60,7 @@ export async function parseDocumentDetails(
         }
         result = pages.join('\n');
       } finally {
+        // 成功或异常都释放 PDF.js worker 和文档资源。
         await task.destroy();
       }
     }

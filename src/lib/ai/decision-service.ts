@@ -20,6 +20,7 @@ export type DecisionRepairResult = {
   promptVersion: string;
   code?: string;
 };
+/** 推荐不是事实：只有引用能在本次资料或已有答案中定位，才保留相应来源标签。 */
 function validateQuestion(q: DecisionQuestion, context: DecisionContext): DecisionQuestion {
   const copy = initializeDecision(q);
   if (
@@ -68,6 +69,7 @@ function validateQuestion(q: DecisionQuestion, context: DecisionContext): Decisi
   }
   return copy;
 }
+/** 单次最多补全三题；失败保留显式错误，不用辅助按钮冒充业务选项。 */
 export async function repairQuestionBatch(
   targets: { id: string; question: DecisionQuestion }[],
   context: DecisionContext,
@@ -157,6 +159,7 @@ export async function repairQuestionBatch(
   }
   return result;
 }
+/** 复用已存在的决策，局部补全失败题；未修复的问题仍标记 failed 供界面恢复。 */
 export async function finalizeDecisionQuestions<T extends DecisionQuestion>(
   raw: T[],
   context: DecisionContext,
